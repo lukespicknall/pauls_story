@@ -57,7 +57,7 @@ slideFrame.addEventListener('click', () => {
 setInterval(() => {
   // advanceImage();
   reverseImage();
-}, 2000);
+}, 8000);
 
 const templatePage = document.createElement('div');
 templatePage.id = 'template-page';
