@@ -154,9 +154,6 @@ import Pic153 from './images/dad153.jpg';
 import Pic154 from './images/dad154.jpg';
 import Pic155 from './images/dad155.jpg';
 import Pic156 from './images/dad156.jpg';
-import Pic157 from './images/dad157.jpg';
-import Pic158 from './images/dad158.jpg';
-import Pic159 from './images/dad159.jpg';
 
 const images = [];
 
@@ -783,17 +780,5 @@ images.push(dad155);
 const dad156 = new Image();
 dad156.src = Pic156;
 images.push(dad156);
-
-const dad157 = new Image();
-dad157.src = Pic157;
-images.push(dad157);
-
-const dad158 = new Image();
-dad158.src = Pic158;
-images.push(dad158);
-
-const dad159 = new Image();
-dad159.src = Pic159;
-images.push(dad159);
 
 export default images;
