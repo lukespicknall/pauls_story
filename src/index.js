@@ -1,5 +1,6 @@
 import './style.css';
 import images from './images';
+import story1 from './audio';
 
 const content = document.getElementById('content');
 
@@ -74,12 +75,109 @@ setInterval(() => {
   reverseImage();
 }, 8000);
 
-const templatePage = document.createElement('div');
-templatePage.id = 'template-page';
+const audioSection = document.createElement('div');
+audioSection.id = 'audio-section';
 
-const templateText = document.createElement('div');
-templateText.id = 'template-text';
-templateText.textContent = 'TEMPLATE';
+const audioUnit1 = document.createElement('div');
+const audioUnit1Label = document.createElement('label');
+const earlyLife = story1[0];
+audioUnit1.classList.add('audio-unit');
+audioUnit1Label.classList.add('audio-unit-label');
+audioUnit1Label.setAttribute('for', 'early-life');
+audioUnit1Label.textContent = 'Early Life';
+audioUnit1.appendChild(audioUnit1Label);
+audioUnit1.appendChild(earlyLife);
 
-templatePage.appendChild(templateText);
-content.appendChild(templatePage);
+const audioUnit2 = document.createElement('div');
+const audioUnit2Label = document.createElement('label');
+const momKidsCarpentry = story1[1];
+audioUnit2.classList.add('audio-unit');
+audioUnit2Label.classList.add('audio-unit-label');
+audioUnit2Label.setAttribute('for', 'mom-kids-carpentry');
+audioUnit2Label.textContent = 'Mom, Kids, Carpentry';
+audioUnit2.appendChild(audioUnit2Label);
+audioUnit2.appendChild(momKidsCarpentry);
+
+const audioUnit3 = document.createElement('div');
+const audioUnit3Label = document.createElement('label');
+const nature = story1[2];
+audioUnit3.classList.add('audio-unit');
+audioUnit3Label.classList.add('audio-unit-label');
+audioUnit3Label.setAttribute('for', 'nature');
+audioUnit3Label.textContent = 'Nature';
+audioUnit3.appendChild(audioUnit3Label);
+audioUnit3.appendChild(nature);
+
+const audioUnit4 = document.createElement('div');
+const audioUnit4Label = document.createElement('label');
+const religion = story1[3];
+audioUnit4.classList.add('audio-unit');
+audioUnit4Label.classList.add('audio-unit-label');
+audioUnit4Label.setAttribute('for', 'religion');
+audioUnit4Label.textContent = 'Religion';
+audioUnit4.appendChild(audioUnit4Label);
+audioUnit4.appendChild(religion);
+
+// const audioUnit1 = document.createElement("div");
+// const audioUnit1Label = document.createElement("label");
+// const earlyLife = story1[0];
+// audioUnit1.classList.add("audio-unit");
+// audioUnit1Label.classList.add("audio-unit-label");
+// audioUnit1Label.setAttribute("for", "early-life");
+// audioUnit1Label.textContent = "Early Life";
+// audioUnit1.appendChild(audioUnit1Label);
+// audioUnit1.appendChild(earlyLife);
+
+// const audioUnit1 = document.createElement("div");
+// const audioUnit1Label = document.createElement("label");
+// const earlyLife = story1[0];
+// audioUnit1.classList.add("audio-unit");
+// audioUnit1Label.classList.add("audio-unit-label");
+// audioUnit1Label.setAttribute("for", "early-life");
+// audioUnit1Label.textContent = "Early Life";
+// audioUnit1.appendChild(audioUnit1Label);
+// audioUnit1.appendChild(earlyLife);
+
+// const audioUnit1 = document.createElement("div");
+// const audioUnit1Label = document.createElement("label");
+// const earlyLife = story1[0];
+// audioUnit1.classList.add("audio-unit");
+// audioUnit1Label.classList.add("audio-unit-label");
+// audioUnit1Label.setAttribute("for", "early-life");
+// audioUnit1Label.textContent = "Early Life";
+// audioUnit1.appendChild(audioUnit1Label);
+// audioUnit1.appendChild(earlyLife);
+
+// const audioUnit1 = document.createElement("div");
+// const audioUnit1Label = document.createElement("label");
+// const earlyLife = story1[0];
+// audioUnit1.classList.add("audio-unit");
+// audioUnit1Label.classList.add("audio-unit-label");
+// audioUnit1Label.setAttribute("for", "early-life");
+// audioUnit1Label.textContent = "Early Life";
+// audioUnit1.appendChild(audioUnit1Label);
+// audioUnit1.appendChild(earlyLife);
+
+// const audioUnit1 = document.createElement("div");
+// const audioUnit1Label = document.createElement("label");
+// const earlyLife = story1[0];
+// audioUnit1.classList.add("audio-unit");
+// audioUnit1Label.classList.add("audio-unit-label");
+// audioUnit1Label.setAttribute("for", "early-life");
+// audioUnit1Label.textContent = "Early Life";
+// audioUnit1.appendChild(audioUnit1Label);
+// audioUnit1.appendChild(earlyLife);
+
+// const audioUnit1 = document.createElement("div");
+// const audioUnit1Label = document.createElement("label");
+// const earlyLife = story1[0];
+// audioUnit1.classList.add("audio-unit");
+// audioUnit1Label.classList.add("audio-unit-label");
+// audioUnit1Label.setAttribute("for", "early-life");
+// audioUnit1Label.textContent = "Early Life";
+// audioUnit1.appendChild(audioUnit1Label);
+// audioUnit1.appendChild(earlyLife);
+
+audioSection.appendChild(audioUnit1);
+audioSection.appendChild(audioUnit2);
+content.appendChild(audioSection);
