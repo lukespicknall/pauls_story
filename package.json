@@ -1,12 +1,18 @@
 {
-  "name": "template_webpack",
+  "name": "pauls_story",
   "version": "1.0.0",
   "description": "A template using webpack with npm, eslint(airbnb guide, JSCommon), and prettier.",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukespicknall/pauls_story.git"
+  },
+  "homepage": "http://lukespicknall.github.io/pauls_story",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack  --watch"
+    "watch": "webpack  --watch",
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +22,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.6.0",
     "style-loader": "^3.3.4",
     "webpack": "^5.90.0",
