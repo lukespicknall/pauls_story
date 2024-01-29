@@ -5,9 +5,9 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/lukespicknall/pauls_story.git"
+    "url": "git+https://github.com/lukespicknall/pauls_story.git"
   },
-  "homepage": "http://lukespicknall.github.io/pauls_story",
+  "homepage": "http://lukespicknall.github.io/pauls_story#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
