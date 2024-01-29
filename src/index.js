@@ -24,11 +24,21 @@ let currentImage = 0;
 // since array starts at 0, we get total count it by running length - 1
 const imageCount = images.length - 1;
 
+const reverseButton = document.createElement('button');
+reverseButton.id = 'reverse-button';
+reverseButton.textContent = '<';
+
+const advanceButton = document.createElement('button');
+advanceButton.id = 'advance-button';
+advanceButton.textContent = '>';
+
 // append/display currentImage[0] on intial page load
 if (currentImage === 0) {
   const imageHolder = images[currentImage];
-  slideFrame.appendChild(imageHolder);
   imageHolder.id = 'current-image';
+  slideFrame.appendChild(reverseButton);
+  slideFrame.appendChild(advanceButton);
+  slideFrame.appendChild(imageHolder);
 }
 
 // grabs and removes removes image on display
@@ -40,7 +50,9 @@ const updateImage = () => {
   slideFrame.removeChild(getCurrent);
   const imageHolder = images[currentImage];
   imageHolder.id = 'current-image';
+  slideFrame.appendChild(reverseButton);
   slideFrame.appendChild(imageHolder);
+  slideFrame.appendChild(advanceButton);
 };
 
 // increases currentImage number so next images[i] is called on updateImage()
@@ -64,16 +76,18 @@ const reverseImage = () => {
   updateImage();
 };
 
-slideFrame.addEventListener('click', () => {
+advanceButton.addEventListener('click', () => {
   advanceImage();
-  // reverseImage();
+});
+
+reverseButton.addEventListener('click', () => {
+  reverseImage();
 });
 
 // runs reverseImage() every 8 seconds to auto advance
 setInterval(() => {
-  // advanceImage();
-  reverseImage();
-}, 8000);
+  advanceImage();
+}, 10000);
 
 const audioSection = document.createElement('div');
 audioSection.id = 'audio-section';
@@ -94,7 +108,7 @@ const momKidsCarpentry = story1[1];
 audioUnit2.classList.add('audio-unit');
 audioUnit2Label.classList.add('audio-unit-label');
 audioUnit2Label.setAttribute('for', 'mom-kids-carpentry');
-audioUnit2Label.textContent = 'Mom, kids, carpentry';
+audioUnit2Label.textContent = 'Mom, kids, and carpentry';
 audioUnit2.appendChild(audioUnit2Label);
 audioUnit2.appendChild(momKidsCarpentry);
 
@@ -164,7 +178,7 @@ const dadSingsKristofferson = story1[8];
 audioUnit9.classList.add('audio-unit');
 audioUnit9Label.classList.add('audio-unit-label');
 audioUnit9Label.setAttribute('for', 'dad-sings-kristofferson');
-audioUnit9Label.textContent = 'Dad sings kristofferson';
+audioUnit9Label.textContent = 'Dad sings Kristofferson';
 audioUnit9.appendChild(audioUnit9Label);
 audioUnit9.appendChild(dadSingsKristofferson);
 
