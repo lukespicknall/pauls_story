@@ -35,8 +35,8 @@ advanceButton.textContent = '>';
 let imageHolder = images[currentImage];
 imageHolder.id = 'current-image';
 slideFrame.appendChild(reverseButton);
-slideFrame.appendChild(advanceButton);
 slideFrame.appendChild(imageHolder);
+slideFrame.appendChild(advanceButton);
 
 // append/display currentImage[0] on intial page load
 
