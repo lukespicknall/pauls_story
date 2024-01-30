@@ -15,10 +15,10 @@ slideFrame.id = 'slide-frame';
 imageSection.appendChild(slideFrame);
 
 // currentImage holds the images[i] position
-// starts at 0
+// starts at random between 0 and 156
 // it isn't actually linked to images[i] data in any way
 // other than the fact the both start at 0 and go up or down sequentially
-let currentImage = 0;
+let currentImage = Math.floor(Math.random() * 157);
 
 // imCount holds the total number of images
 // since array starts at 0, we get total count it by running length - 1
@@ -32,14 +32,13 @@ const advanceButton = document.createElement('button');
 advanceButton.id = 'advance-button';
 advanceButton.textContent = '>';
 
+let imageHolder = images[currentImage];
+imageHolder.id = 'current-image';
+slideFrame.appendChild(reverseButton);
+slideFrame.appendChild(advanceButton);
+slideFrame.appendChild(imageHolder);
+
 // append/display currentImage[0] on intial page load
-if (currentImage === 0) {
-  const imageHolder = images[currentImage];
-  imageHolder.id = 'current-image';
-  slideFrame.appendChild(reverseButton);
-  slideFrame.appendChild(advanceButton);
-  slideFrame.appendChild(imageHolder);
-}
 
 // grabs and removes removes image on display
 // appends the new current image
@@ -48,7 +47,7 @@ if (currentImage === 0) {
 const updateImage = () => {
   const getCurrent = document.getElementById('current-image');
   slideFrame.removeChild(getCurrent);
-  const imageHolder = images[currentImage];
+  imageHolder = images[currentImage];
   imageHolder.id = 'current-image';
   slideFrame.appendChild(reverseButton);
   slideFrame.appendChild(imageHolder);
@@ -76,18 +75,28 @@ const reverseImage = () => {
   updateImage();
 };
 
+// put timer in a var so i could mess with it in the buttons
+let timer = setInterval(() => { advanceImage(); }, 10000);
+
 advanceButton.addEventListener('click', () => {
   advanceImage();
+  // reset timer to prevent short advances
+  clearInterval(timer);
+  timer = setInterval(() => {
+    advanceImage();
+  }, 10000);
 });
 
 reverseButton.addEventListener('click', () => {
   reverseImage();
+  // reset timer to prevent short advances
+  clearInterval(timer);
+  timer = setInterval(() => {
+    advanceImage();
+  }, 10000);
 });
 
 // runs reverseImage() every 8 seconds to auto advance
-setInterval(() => {
-  advanceImage();
-}, 10000);
 
 const audioSection = document.createElement('div');
 audioSection.id = 'audio-section';
