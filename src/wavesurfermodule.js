@@ -108,7 +108,7 @@ const createPlayer = (
     // set initial current time to 00:00
     currentDisplay.textContent = '0:00';
     // whenever track time updates, update current time display
-    wavesurfer.on('audioprocess', () => {
+    wavesurfer.on('timeupdate', () => {
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
     });
 
