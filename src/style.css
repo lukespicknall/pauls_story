@@ -62,19 +62,86 @@
     padding: 0 8px 0 8px;
 }
 
+/* AUDIO SECTION */
+
 #audio-section{
     box-sizing: border-box;
     width: 100%;
     min-width: 375px;
     /* height: 100vh; */
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 0 60px 0;
+    margin: 40px 0 60px 0;
     /* background-color: rgb(241, 239, 89); */
 }
-.audio-unit {
+
+#track-container {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 365px;
+    max-width: 65%;
+}
+
+.track {
+    margin: 0;
+    margin: 0 0 40px 0;
+}
+
+.track-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.options-display {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* margin: 0 0 40px 0; */
+}
+
+.play-btn {
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    border: none;
+    background-color: white;
+}
+
+.play-btn:hover {
+    background-color: #e8e9e8;
+}
+
+.play-img {
+    height: 30px;
+    width: 30px;
+}
+
+.pause-img {
+    height: 30px;
+    width: 30px;
+}
+
+.time-display {
+    display: flex;
+    gap: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.current-display {
+    margin: 0;
+}
+
+.durationDisplay {
+    margin: 0;
+}
+
+.divider {
+    margin: 0;
+}
+
+/* OLD CODE STYLE */
+/* .audio-unit {
     box-sizing: border-box;
     width: 100%;
     min-width: 365px;
@@ -95,5 +162,4 @@ audio::-webkit-media-controls-panel {
     margin: 0 0 20px 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
-    /* font-weight: b; */
-}
+} */

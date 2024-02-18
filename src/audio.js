@@ -1,3 +1,4 @@
+import createPlayer from './wavesurfermodule';
 import EarlyLife from './audio/01_EarlyLife.mp3';
 import MomKidsCarpentry from './audio/02_MomKidsCarpentry.mp3';
 import Nature from './audio/03_Nature.mp3';
@@ -7,61 +8,96 @@ import AdviceToHisKids from './audio/06_AdviceToHisKids.mp3';
 import MessageToTheFamily from './audio/07_MessageToTheFamily.mp3';
 import MessageToMom from './audio/08_MessageToMom.mp3';
 import DadSingsKristofferson from './audio/09_DadSingsKristofferson.mp3';
+import Play from './icons/play.svg';
+import Pause from './icons/pause.svg';
 
-const story1 = [];
+const loadAudio = () => {
+  const tracks = [
+    EarlyLife,
+    MomKidsCarpentry,
+    Nature,
+    Religion,
+    AdviceToGrandkids,
+    AdviceToHisKids,
+    MessageToTheFamily,
+    MessageToMom,
+    DadSingsKristofferson,
+  ];
 
-const earlyLife = new Audio(EarlyLife);
-earlyLife.setAttribute('controls', 'true');
-earlyLife.classList.add('audio-player');
-earlyLife.setAttribute('name', 'early-life');
-story1.push(earlyLife);
+  const titles = [
+    'Early life',
+    'Mom, kids, carpentry',
+    'Nature',
+    'Religion',
+    'Advice to grandkids',
+    'Advice to kids',
+    'Message to the family',
+    'Message to Mom',
+    'Dad sings Kristofferson',
+  ];
 
-const momKidsCarpentry = new Audio(MomKidsCarpentry);
-momKidsCarpentry.setAttribute('controls', 'true');
-momKidsCarpentry.classList.add('audio-player');
-momKidsCarpentry.setAttribute('name', 'mom-kids-carpentry');
-story1.push(momKidsCarpentry);
+  // creates a container for the tracks and appends it to DOM
+  const trackContainer = document.getElementById('track-container');
 
-const nature = new Audio(Nature);
-nature.setAttribute('controls', 'true');
-nature.classList.add('audio-player');
-nature.setAttribute('name', 'nature');
-story1.push(nature);
+  // create wavesurfer players from wavesurfermodule.js with following params
+  createPlayer(tracks, titles, trackContainer, Play, Pause);
+};
 
-const religion = new Audio(Religion);
-religion.setAttribute('controls', 'true');
-religion.classList.add('audio-player');
-religion.setAttribute('name', 'religion');
-story1.push(religion);
+export default loadAudio;
 
-const adviceToGrandkids = new Audio(AdviceToGrandkids);
-adviceToGrandkids.setAttribute('controls', 'true');
-adviceToGrandkids.classList.add('audio-player');
-adviceToGrandkids.setAttribute('name', 'advice-to-grandkids');
-story1.push(adviceToGrandkids);
+// OLD WAY OF LOADING AUDIO PLAYER
+// const earlyLife = new Audio(EarlyLife);
+// earlyLife.setAttribute('controls', 'true');
+// earlyLife.classList.add('audio-player');
+// earlyLife.setAttribute('name', 'early-life');
+// story1.push(earlyLife);
 
-const adviceToHisKids = new Audio(AdviceToHisKids);
-adviceToHisKids.setAttribute('controls', 'true');
-adviceToHisKids.classList.add('audio-player');
-adviceToHisKids.setAttribute('name', 'advice-to-his-kids');
-story1.push(adviceToHisKids);
+// const momKidsCarpentry = new Audio(MomKidsCarpentry);
+// momKidsCarpentry.setAttribute('controls', 'true');
+// momKidsCarpentry.classList.add('audio-player');
+// momKidsCarpentry.setAttribute('name', 'mom-kids-carpentry');
+// story1.push(momKidsCarpentry);
 
-const messageToTheFamily = new Audio(MessageToTheFamily);
-messageToTheFamily.setAttribute('controls', 'true');
-messageToTheFamily.classList.add('audio-player');
-messageToTheFamily.setAttribute('name', 'message-to-the-family');
-story1.push(messageToTheFamily);
+// const nature = new Audio(Nature);
+// nature.setAttribute('controls', 'true');
+// nature.classList.add('audio-player');
+// nature.setAttribute('name', 'nature');
+// story1.push(nature);
 
-const messageToMom = new Audio(MessageToMom);
-messageToMom.setAttribute('controls', 'true');
-messageToMom.classList.add('audio-player');
-messageToMom.setAttribute('name', 'message-to-mom');
-story1.push(messageToMom);
+// const religion = new Audio(Religion);
+// religion.setAttribute('controls', 'true');
+// religion.classList.add('audio-player');
+// religion.setAttribute('name', 'religion');
+// story1.push(religion);
 
-const dadSingsKristofferson = new Audio(DadSingsKristofferson);
-dadSingsKristofferson.setAttribute('controls', 'true');
-dadSingsKristofferson.classList.add('audio-player');
-dadSingsKristofferson.setAttribute('name', 'dad-sings-kristofferson');
-story1.push(dadSingsKristofferson);
+// const adviceToGrandkids = new Audio(AdviceToGrandkids);
+// adviceToGrandkids.setAttribute('controls', 'true');
+// adviceToGrandkids.classList.add('audio-player');
+// adviceToGrandkids.setAttribute('name', 'advice-to-grandkids');
+// story1.push(adviceToGrandkids);
 
-export default story1;
+// const adviceToHisKids = new Audio(AdviceToHisKids);
+// adviceToHisKids.setAttribute('controls', 'true');
+// adviceToHisKids.classList.add('audio-player');
+// adviceToHisKids.setAttribute('name', 'advice-to-his-kids');
+// story1.push(adviceToHisKids);
+
+// const messageToTheFamily = new Audio(MessageToTheFamily);
+// messageToTheFamily.setAttribute('controls', 'true');
+// messageToTheFamily.classList.add('audio-player');
+// messageToTheFamily.setAttribute('name', 'message-to-the-family');
+// story1.push(messageToTheFamily);
+
+// const messageToMom = new Audio(MessageToMom);
+// messageToMom.setAttribute('controls', 'true');
+// messageToMom.classList.add('audio-player');
+// messageToMom.setAttribute('name', 'message-to-mom');
+// story1.push(messageToMom);
+
+// const dadSingsKristofferson = new Audio(DadSingsKristofferson);
+// dadSingsKristofferson.setAttribute('controls', 'true');
+// dadSingsKristofferson.classList.add('audio-player');
+// dadSingsKristofferson.setAttribute('name', 'dad-sings-kristofferson');
+// story1.push(dadSingsKristofferson);
+
+// export default story1;
