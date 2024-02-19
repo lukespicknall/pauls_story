@@ -112,6 +112,10 @@ const createPlayer = (
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
     });
 
+    wavesurfer.on('seeking', () => {
+      currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
+    });
+
     // set intial duration time to 00:00 until ready - just to fill the space
     durationDisplay.textContent = '0:00';
     // when track is decoded and ready to play, display track duration
