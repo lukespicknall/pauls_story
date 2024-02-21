@@ -38,6 +38,7 @@ const createPlayer = (
       barWidth: 0,
       barRadius: 0,
       cursorWidth: 0,
+      autoplay: false,
       dragToSeek: true,
     });
 
@@ -108,12 +109,17 @@ const createPlayer = (
     // set initial current time to 00:00
     currentDisplay.textContent = '0:00';
     // whenever track time updates, update current time display
+
+    // wavesurfer.on('seeking', () => {
+    //   currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
+    //   const seekUpdate = wavesurfer.getCurrentTime();
+    //   wavesurfer.setTime(seekUpdate);
+    // console.log(wavesurfer.getCurrentTime());
+    // });
+
     wavesurfer.on('timeupdate', () => {
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
-    });
-
-    wavesurfer.on('seeking', () => {
-      currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
+      console.log(wavesurfer.getCurrentTime());
     });
 
     // set intial duration time to 00:00 until ready - just to fill the space
