@@ -16,10 +16,10 @@ const createPlayer = (
   playImg,
   pauseImg,
 ) => {
-  let initiated = false;
-  const updateinitiation = (a) => {
-    initiated = a;
-  };
+  // let initiated = false;
+  // const updateinitiation = (a) => {
+  //   initiated = a;
+  // };
   for (let i = 0; i < audioArray.length; i += 1) {
     // create a track div w/ id of track[i], add class, append to targetParent
     const track = document.createElement('div');
@@ -74,7 +74,7 @@ const createPlayer = (
     // on click, playBtn plays or pauses the wavesurfer instance
     playBtn.onclick = () => {
       wavesurfer.playPause();
-      updateinitiation(true);
+      // updateinitiation(true);
       // console.log(initiated)
     };
 
@@ -150,21 +150,22 @@ const createPlayer = (
     // we dont want to interrupt its process by muting it before it can complete
     // so we wait for confirmation of completion, then .pause()
 
-    if (initiated === false) {
-      wavesurfer.once('seeking', () => {
-        const playPromise = wavesurfer.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            console.log('initiated');
-            wavesurfer.pause();
-          });
+    // if (initiated === false) {
+    wavesurfer.once('seeking', () => {
+      wavesurfer.play();
+      // const playPromise = wavesurfer.play();
+      // if (playPromise !== undefined) {
+      //   playPromise.then(() => {
+      //     console.log('initiated');
+      //     wavesurfer.pause();
+      //   });
         // .catch((error) => {
         // Auto-play was prevented
         // Show paused UI.
         // });
-        }
-      });
-    }
+      // }
+    });
+    // }
 
     // if (initiated === true) {
 
