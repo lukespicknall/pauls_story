@@ -16,6 +16,10 @@ const createPlayer = (
   playImg,
   pauseImg,
 ) => {
+  let initiated = false;
+  const updateinitiation = (a) => {
+    initiated = a;
+  };
   for (let i = 0; i < audioArray.length; i += 1) {
     // create a track div w/ id of track[i], add class, append to targetParent
     const track = document.createElement('div');
@@ -70,6 +74,8 @@ const createPlayer = (
     // on click, playBtn plays or pauses the wavesurfer instance
     playBtn.onclick = () => {
       wavesurfer.playPause();
+      updateinitiation(true);
+      // console.log(initiated)
     };
 
     // when paused, show the play img
@@ -119,7 +125,7 @@ const createPlayer = (
 
     wavesurfer.on('timeupdate', () => {
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
-      console.log(wavesurfer.getCurrentTime());
+      // console.log(wavesurfer.getCurrentTime());
     });
 
     // set intial duration time to 00:00 until ready - just to fill the space
@@ -128,6 +134,40 @@ const createPlayer = (
     wavesurfer.on('ready', () => {
       durationDisplay.textContent = formatTime(wavesurfer.getDuration());
     });
+
+    // THE RATIONALE
+    // prevents issue on mobile: audioContext is not started until first user play interaction
+    // this means if user seeks ahead before hitting play - track still starts form 00:00,
+    // not the new time seeked to, becuase seek occured before audio interaction initiated
+    // and then the time display is out of sync and the entire seeking ui is out of sync.
+
+    // THE CODE
+    // using.once method, make the first click on the wavesurfer object
+    // create a promise that audio is playing.
+    // if promise becomes satisfied, immediately mute audio.
+    // this initiates audio context w/o user hearing audio, updates time, gets everything in sync
+    // we wait for the succesfully returned promise because .play() is a promise
+    // we dont want to interrupt its process by muting it before it can complete
+    // so we wait for confirmation of completion, then .pause()
+
+    if (initiated === false) {
+      wavesurfer.once('click', () => {
+        const playPromise = wavesurfer.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            wavesurfer.pause();
+          });
+        // .catch((error) => {
+        // Auto-play was prevented
+        // Show paused UI.
+        // });
+        }
+      });
+    }
+
+    // if (initiated === true) {
+
+    // }
 
     // append time elements to timeDisplay
     timeDisplay.appendChild(currentDisplay);
@@ -168,6 +208,7 @@ const createPlayer = (
     // playBtn.addEventListener('mouseleave', () => {
     //   playBtn.style.backgroundColor = 'white';
     // });
+    //   const initiated = false;
   }
 };
 
