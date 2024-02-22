@@ -151,10 +151,11 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     if (initiated === false) {
-      wavesurfer.once('click', () => {
+      wavesurfer.once('seeking', () => {
         const playPromise = wavesurfer.play();
         if (playPromise !== undefined) {
           playPromise.then(() => {
+            console.log('initiated');
             wavesurfer.pause();
           });
         // .catch((error) => {
