@@ -39,7 +39,7 @@ const createPlayer = (
       waveColor: '#c4c3c4',
       progressColor: 'rgb(152, 77, 196)',
       height: 85,
-      barWidth: 0,
+      barWidth: 2,
       barRadius: 0,
       cursorWidth: 0,
       autoplay: false,
@@ -73,8 +73,8 @@ const createPlayer = (
 
     // on click, playBtn plays or pauses the wavesurfer instance
     playBtn.onclick = () => {
-      // const timeHolder = wavesurfer.getCurrentTime();
-      // wavesurfer.setTime(timeHolder);
+      const timeHolder = wavesurfer.getCurrentTime();
+      wavesurfer.setTime(timeHolder);
       wavesurfer.playPause();
       // updateinitiation(true);
       // console.log(initiated)
@@ -154,7 +154,7 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    wavesurfer.once('mousedown', () => {
+    wavesurfer.once('mouseover', () => {
       wavesurfer.play();
       // const playPromise = wavesurfer.play();
       // if (playPromise !== undefined) {
