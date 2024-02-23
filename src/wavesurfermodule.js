@@ -154,7 +154,7 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    wavesurfer.once('touchstart', () => {
+    wavesurfer.once('mousedown', () => {
       wavesurfer.play();
       // const playPromise = wavesurfer.play();
       // if (playPromise !== undefined) {
