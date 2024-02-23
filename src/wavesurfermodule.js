@@ -73,8 +73,8 @@ const createPlayer = (
 
     // on click, playBtn plays or pauses the wavesurfer instance
     playBtn.onclick = () => {
-      const timeHolder = wavesurfer.getCurrentTime();
-      wavesurfer.setTime(timeHolder);
+      // const timeHolder = wavesurfer.getCurrentTime();
+      // wavesurfer.setTime(timeHolder);
       wavesurfer.playPause();
       // updateinitiation(true);
       // console.log(initiated)
