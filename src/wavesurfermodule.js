@@ -151,7 +151,7 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    wavesurfer.once('seeking', () => {
+    wavesurfer.once('click', () => {
       wavesurfer.play();
       // const playPromise = wavesurfer.play();
       // if (playPromise !== undefined) {
@@ -159,10 +159,10 @@ const createPlayer = (
       //     console.log('initiated');
       //     wavesurfer.pause();
       //   });
-        // .catch((error) => {
-        // Auto-play was prevented
-        // Show paused UI.
-        // });
+      // .catch((error) => {
+      // Auto-play was prevented
+      // Show paused UI.
+      // });
       // }
     });
     // }
