@@ -81,11 +81,14 @@ const createPlayer = (
     // when paused, show the play img
     wavesurfer.on('pause', () => {
       playBtn.replaceChild(play, pause);
+      wavesurfer.waveColor = 'blue';
     });
 
     // when playing, show, the pause img
     wavesurfer.on('play', () => {
       playBtn.replaceChild(pause, play);
+      const timeHolder = wavesurfer.getCurrentTime();
+      wavesurfer.setTime(timeHolder);
     });
 
     // append optionsdisplay to track
@@ -151,7 +154,7 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    wavesurfer.once('click', () => {
+    wavesurfer.once('scroll', () => {
       wavesurfer.play();
       // const playPromise = wavesurfer.play();
       // if (playPromise !== undefined) {
