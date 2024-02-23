@@ -73,8 +73,8 @@ const createPlayer = (
 
     // on click, playBtn plays or pauses the wavesurfer instance
     playBtn.onclick = () => {
-      const timeHolder = wavesurfer.getCurrentTime();
-      wavesurfer.setTime(timeHolder);
+      // const timeHolder = wavesurfer.getCurrentTime();
+      // wavesurfer.setTime(timeHolder);
       wavesurfer.playPause();
       // updateinitiation(true);
       // console.log(initiated)
@@ -83,7 +83,7 @@ const createPlayer = (
     // when paused, show the play img
     wavesurfer.on('pause', () => {
       playBtn.replaceChild(play, pause);
-      wavesurfer.waveColor = 'blue';
+      // wavesurfer.waveColor = 'blue';
     });
 
     // when playing, show, the pause img
@@ -154,7 +154,7 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    wavesurfer.once('onscroll', () => {
+    wavesurfer.once('mousedown', () => {
       wavesurfer.play();
       // const playPromise = wavesurfer.play();
       // if (playPromise !== undefined) {
