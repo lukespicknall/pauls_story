@@ -16,16 +16,11 @@ const createPlayer = (
   playImg,
   pauseImg,
 ) => {
-  // let initiated = 0;
-  // const updateinitiation = (b) => {
-  //   initiated = b;
-  // };
   for (let i = 0; i < audioArray.length; i += 1) {
     // create a track div w/ id of track[i], add class, append to targetParent
     const track = document.createElement('div');
     track.id = `track${[i]}`;
     track.classList.add('track');
-    targetParent.appendChild(track);
 
     // create accompanying track title in DOM, assign it from trackTitles[i]
     const trackTitle = document.createElement('div');
@@ -33,13 +28,22 @@ const createPlayer = (
     trackTitle.textContent = trackTitles[i];
     track.appendChild(trackTitle);
 
-    // create wavesurfer instance with options applied, append to the above track div
+    // div to hold the wavesurfer.js object and initiation overlays
+    const waveContainer = document.createElement('div');
+    waveContainer.id = `wave-container${[i]}`;
+    waveContainer.classList.add('wave-contaier');
+    track.appendChild(waveContainer);
+
+    // append track to targetParent parameter
+    targetParent.appendChild(track);
+
+    // create wavesurfer instance with options applied, append to the above waveContainer div
     const wavesurfer = WaveSurfer.create({
-      container: `#track${[i]}`,
+      container: `#wave-container${[i]}`,
       waveColor: '#c4c3c4',
       progressColor: 'rgb(152, 77, 196)',
       height: 85,
-      barWidth: 5,
+      barWidth: 0,
       barRadius: 0,
       cursorWidth: 0,
       autoplay: false,
@@ -48,6 +52,32 @@ const createPlayer = (
 
     // load wavesurfer with audio file
     wavesurfer.load(audioArray[i]);
+
+    // create overlay that covers wavesurfer.js object within waveContainer.
+    // concept is to force user to initiate audio file on browser by
+    // hitting play before they can drag/seek/timedate on wave ui.
+    // first action on wavesurfer audio must be play().
+    // this avoids issue on mobile where timing goes out of sync if user drags/seeks
+    // prior to audio interaction. Mobile environment lock down what can
+    // happen on audio before first user interaction.
+    // now interaction through ('click') and .play() is forced first.
+    const initiateOverlay = document.createElement('div');
+    initiateOverlay.classList.add('initiate-overlay');
+
+    // the initiation button in the overlay
+    const initiateText = document.createElement('button');
+    initiateText.classList.add('initiate-text');
+    initiateText.textContent = 'Click to Play';
+
+    // append overlay elements to waveContaier
+    initiateOverlay.appendChild(initiateText);
+    waveContainer.appendChild(initiateOverlay);
+
+    // if overlay is clicked, initiate play() and remove overlay
+    initiateOverlay.onclick = () => {
+      wavesurfer.play();
+      initiateOverlay.style.display = 'none';
+    };
 
     // optionsDisplay container for play/pause and timeDisplay
     const optionsDisplay = document.createElement('div');
@@ -72,12 +102,10 @@ const createPlayer = (
     playBtn.appendChild(play);
 
     // on click, playBtn plays or pauses the wavesurfer instance
+    // and removes overlay if it is there
     playBtn.onclick = () => {
-      // const timeHolder = wavesurfer.getCurrentTime();
-      // wavesurfer.setTime(timeHolder);
       wavesurfer.playPause();
-      // updateinitiation(true);
-      // console.log(initiated)
+      initiateOverlay.style.display = 'none';
     };
 
     // when paused, show the play img
@@ -119,13 +147,6 @@ const createPlayer = (
     currentDisplay.textContent = '0:00';
     // whenever track time updates, update current time display
 
-    // wavesurfer.on('seeking', () => {
-    //   currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
-    //   const seekUpdate = wavesurfer.getCurrentTime();
-    //   wavesurfer.setTime(seekUpdate);
-    // console.log(wavesurfer.getCurrentTime());
-    // });
-
     wavesurfer.on('timeupdate', () => {
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
       // console.log(wavesurfer.getCurrentTime());
@@ -138,100 +159,6 @@ const createPlayer = (
       durationDisplay.textContent = formatTime(wavesurfer.getDuration());
     });
 
-    // THE RATIONALE
-    // prevents issue on mobile: audioContext is not started until first user play interaction
-    // this means if user seeks ahead before hitting play - track still starts form 00:00,
-    // not the new time seeked to, becuase seek occured before audio interaction initiated
-    // and then the time display is out of sync and the entire seeking ui is out of sync.
-
-    // THE CODE
-    // using.once method, make the first click on the wavesurfer object
-    // create a promise that audio is playing.
-    // if promise becomes satisfied, immediately mute audio.
-    // this initiates audio context w/o user hearing audio, updates time, gets everything in sync
-    // we wait for the succesfully returned promise because .play() is a promise
-    // we dont want to interrupt its process by muting it before it can complete
-    // so we wait for confirmation of completion, then .pause()
-
-    // if (initiated === false) {
-    wavesurfer.once('interaction', () => {
-      // if (wavesurfer.isPlaying() === false) {
-      wavesurfer.play();
-      const playPromise = wavesurfer.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          setTimeout(() => {
-            wavesurfer.pause();
-            console.log('initiated');
-          }, 100);
-          // wavesurfer.pause();
-          // console.log('initiated');
-        });
-        // .catch((error) => {
-        // Auto-play was prevented
-        // Show paused UI.
-        // });
-      }
-      // }
-    });
-    // }
-
-    // if (initiated === true) {
-
-    // }
-
-    // wavesurfer.on('interaction', () => {
-    //   console.log('interaction');
-    // });
-
-    wavesurfer.on('gesturestart', () => {
-      console.log('gesturestart');
-    });
-
-    wavesurfer.on('gesturechange', () => {
-      console.log('gesturechange');
-    });
-
-    wavesurfer.on('mousemove', () => {
-      console.log('mousemove');
-    });
-
-    wavesurfer.on('mousedown', () => {
-      console.log('mousedown');
-    });
-
-    wavesurfer.on('mouseup', () => {
-      console.log('mouseup');
-    });
-
-    wavesurfer.on('mouseover', () => {
-      console.log('mouseover');
-    });
-
-    wavesurfer.on('touch', () => {
-      console.log('touch');
-    });
-
-    wavesurfer.on('touchstart', () => {
-      console.log('touchstart');
-    });
-
-    wavesurfer.on('touchmove', () => {
-      console.log('touchmove');
-    });
-
-    wavesurfer.on('touchend', () => {
-      console.log('touchend');
-    });
-
-    // wavesurfer.on('drag', () => {
-    //   console.log('drag');
-    // });
-
-    wavesurfer.on('click', () => {
-      console.log('click');
-    });
-
     // append time elements to timeDisplay
     timeDisplay.appendChild(currentDisplay);
     timeDisplay.appendChild(divider);
@@ -242,6 +169,20 @@ const createPlayer = (
 
     // js style for default that can be commented
     // DOM elements can be grabbed by assigned css selector
+
+    waveContainer.style.position = 'relative';
+
+    initiateOverlay.style.position = 'absolute';
+    initiateOverlay.style.width = '100%';
+    initiateOverlay.style.height = '100%';
+    initiateOverlay.style.display = 'flex';
+    initiateOverlay.style.boxSizing = 'boder-box';
+    initiateOverlay.style.justifyContent = 'center';
+    initiateOverlay.style.alignItems = 'center';
+    initiateOverlay.style.zIndex = '2';
+    initiateOverlay.style.top = '0';
+    initiateOverlay.style.left = '0';
+
     // trackTitle.style.fontSize = '20px';
 
     // optionsDisplay.style.display = 'flex';
