@@ -16,9 +16,9 @@ const createPlayer = (
   playImg,
   pauseImg,
 ) => {
-  // let initiated = false;
-  // const updateinitiation = (a) => {
-  //   initiated = a;
+  // let initiated = 0;
+  // const updateinitiation = (b) => {
+  //   initiated = b;
   // };
   for (let i = 0; i < audioArray.length; i += 1) {
     // create a track div w/ id of track[i], add class, append to targetParent
@@ -39,7 +39,7 @@ const createPlayer = (
       waveColor: '#c4c3c4',
       progressColor: 'rgb(152, 77, 196)',
       height: 85,
-      barWidth: 0,
+      barWidth: 5,
       barRadius: 0,
       cursorWidth: 0,
       autoplay: false,
@@ -127,7 +127,6 @@ const createPlayer = (
     // });
 
     wavesurfer.on('timeupdate', () => {
-      wavesurfer.play();
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
       // console.log(wavesurfer.getCurrentTime());
     });
@@ -155,20 +154,22 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    // wavesurfer.once('mousedown', () => {
-    //   wavesurfer.play();
-    // const playPromise = wavesurfer.play();
-    // if (playPromise !== undefined) {
-    //   playPromise.then(() => {
-    //     console.log('initiated');
-    //     wavesurfer.pause();
-    //   });
-    // .catch((error) => {
-    // Auto-play was prevented
-    // Show paused UI.
-    // });
-    // }
-    // });
+    wavesurfer.once('click', () => {
+      if (wavesurfer.isPlaying() === false) {
+        wavesurfer.play();
+        const playPromise = wavesurfer.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // console.log('initiated');
+            wavesurfer.pause();
+          });
+        // .catch((error) => {
+        // Auto-play was prevented
+        // Show paused UI.
+        // });
+        }
+      }
+    });
     // }
 
     // if (initiated === true) {
