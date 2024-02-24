@@ -39,7 +39,7 @@ const createPlayer = (
       waveColor: '#c4c3c4',
       progressColor: 'rgb(152, 77, 196)',
       height: 85,
-      barWidth: 5,
+      barWidth: 0,
       barRadius: 0,
       cursorWidth: 0,
       autoplay: false,
@@ -127,6 +127,7 @@ const createPlayer = (
     // });
 
     wavesurfer.on('timeupdate', () => {
+      wavesurfer.play();
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
       // console.log(wavesurfer.getCurrentTime());
     });
@@ -154,20 +155,20 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    wavesurfer.once('mousedown', () => {
-      wavesurfer.play();
-      // const playPromise = wavesurfer.play();
-      // if (playPromise !== undefined) {
-      //   playPromise.then(() => {
-      //     console.log('initiated');
-      //     wavesurfer.pause();
-      //   });
-      // .catch((error) => {
-      // Auto-play was prevented
-      // Show paused UI.
-      // });
-      // }
-    });
+    // wavesurfer.once('mousedown', () => {
+    //   wavesurfer.play();
+    // const playPromise = wavesurfer.play();
+    // if (playPromise !== undefined) {
+    //   playPromise.then(() => {
+    //     console.log('initiated');
+    //     wavesurfer.pause();
+    //   });
+    // .catch((error) => {
+    // Auto-play was prevented
+    // Show paused UI.
+    // });
+    // }
+    // });
     // }
 
     // if (initiated === true) {
