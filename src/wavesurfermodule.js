@@ -154,7 +154,7 @@ const createPlayer = (
     // so we wait for confirmation of completion, then .pause()
 
     // if (initiated === false) {
-    wavesurfer.once('click', () => {
+    wavesurfer.once('interaction', () => {
       // if (wavesurfer.isPlaying() === false) {
       wavesurfer.play();
       const playPromise = wavesurfer.play();
@@ -163,7 +163,7 @@ const createPlayer = (
           setTimeout(() => {
             wavesurfer.pause();
             console.log('initiated');
-          }, 500);
+          }, 100);
           // wavesurfer.pause();
           // console.log('initiated');
         });
@@ -180,9 +180,9 @@ const createPlayer = (
 
     // }
 
-    wavesurfer.on('interaction', () => {
-      console.log('interaction');
-    });
+    // wavesurfer.on('interaction', () => {
+    //   console.log('interaction');
+    // });
 
     wavesurfer.on('gesturestart', () => {
       console.log('gesturestart');
@@ -224,9 +224,9 @@ const createPlayer = (
       console.log('touchend');
     });
 
-    wavesurfer.on('drag', () => {
-      console.log('drag');
-    });
+    // wavesurfer.on('drag', () => {
+    //   console.log('drag');
+    // });
 
     wavesurfer.on('click', () => {
       console.log('click');
