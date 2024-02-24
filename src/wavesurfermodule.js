@@ -39,7 +39,7 @@ const createPlayer = (
       waveColor: '#c4c3c4',
       progressColor: 'rgb(152, 77, 196)',
       height: 85,
-      barWidth: 0,
+      barWidth: 5,
       barRadius: 0,
       cursorWidth: 0,
       autoplay: false,
