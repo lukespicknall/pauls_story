@@ -155,26 +155,74 @@ const createPlayer = (
 
     // if (initiated === false) {
     wavesurfer.once('click', () => {
-      if (wavesurfer.isPlaying() === false) {
-        wavesurfer.play();
-        const playPromise = wavesurfer.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            // console.log('initiated');
-            wavesurfer.pause();
-          });
+      // if (wavesurfer.isPlaying() === false) {
+      wavesurfer.play();
+      const playPromise = wavesurfer.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          wavesurfer.pause();
+          console.log('initiated');
+        });
         // .catch((error) => {
         // Auto-play was prevented
         // Show paused UI.
         // });
-        }
       }
+      // }
     });
     // }
 
     // if (initiated === true) {
 
     // }
+
+    wavesurfer.on('interaction', () => {
+      console.log('interaction');
+    });
+
+    wavesurfer.on('gesturestart', () => {
+      console.log('gesturestart');
+    });
+
+    wavesurfer.on('gesturechange', () => {
+      console.log('gesturechange');
+    });
+
+    wavesurfer.on('mousemove', () => {
+      console.log('mousemove');
+    });
+
+    wavesurfer.on('mousedown', () => {
+      console.log('mousedown');
+    });
+
+    wavesurfer.on('mouseup', () => {
+      console.log('mouseup');
+    });
+
+    wavesurfer.on('mouseover', () => {
+      console.log('mouseover');
+    });
+
+    wavesurfer.on('touch', () => {
+      console.log('touch');
+    });
+
+    wavesurfer.on('touchstart', () => {
+      console.log('touchstart');
+    });
+
+    wavesurfer.on('touchmove', () => {
+      console.log('touchmove');
+    });
+
+    wavesurfer.on('touchend', () => {
+      console.log('touchend');
+    });
+
+    wavesurfer.on('drag', () => {
+      console.log('drag');
+    });
 
     // append time elements to timeDisplay
     timeDisplay.appendChild(currentDisplay);
