@@ -39,7 +39,7 @@ const createPlayer = (
       waveColor: '#c4c3c4',
       progressColor: 'rgb(152, 77, 196)',
       height: 85,
-      barWidth: 5,
+      barWidth: 0,
       barRadius: 0,
       cursorWidth: 0,
       autoplay: false,
@@ -160,8 +160,12 @@ const createPlayer = (
       const playPromise = wavesurfer.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          wavesurfer.pause();
-          console.log('initiated');
+          setTimeout(() => {
+            wavesurfer.pause();
+            console.log('initiated');
+          }, 500);
+          // wavesurfer.pause();
+          // console.log('initiated');
         });
         // .catch((error) => {
         // Auto-play was prevented
@@ -222,6 +226,10 @@ const createPlayer = (
 
     wavesurfer.on('drag', () => {
       console.log('drag');
+    });
+
+    wavesurfer.on('click', () => {
+      console.log('click');
     });
 
     // append time elements to timeDisplay
