@@ -65,7 +65,7 @@ const createPlayer = (
     const loadBox = document.createElement('div');
     loadBox.id = `load-box${[i]}`;
     loadBox.classList.add('load-box');
-    loadBox.textContent = 'loading . . .';
+    loadBox.textContent = 'loading...';
 
     // append box to overlay, and overlay to track
     loadOverlay.appendChild(loadBox);
@@ -146,7 +146,7 @@ const createPlayer = (
     currentDisplay.classList.add('current-display');
 
     const durationDisplay = document.createElement('div');
-    durationDisplay.classList.add('durationDisplay');
+    durationDisplay.classList.add('duration-display');
 
     // divider to sperate displays and its text
     const divider = document.createElement('div');
