@@ -53,24 +53,41 @@ const createPlayer = (
     // load wavesurfer with audio file
     wavesurfer.load(audioArray[i]);
 
-    // create overlay that covers wavesurfer.js object within waveContainer.
-    // concept is to force user to initiate audio file on browser by
+    // div to hold the wavesurfer.js object and initiation overlays
+    // the point of this overlay is to have something completely over the track and all
+    // of it options until th track is ready to be played.
+    // this is done because if one hits the play button before track is ready, we get out of sync
+    const loadOverlay = document.createElement('div');
+    loadOverlay.id = `load-overlay${[i]}`;
+    loadOverlay.classList.add('load-overlay');
+
+    // div to hold the loading text
+    const loadBox = document.createElement('div');
+    loadBox.id = `load-box${[i]}`;
+    loadBox.classList.add('load-box');
+    loadBox.textContent = 'loading . . .';
+
+    // append box to overlay, and overlay to track
+    loadOverlay.appendChild(loadBox);
+    track.appendChild(loadOverlay);
+
+    // when track is decoded and ready to play, remove the loading overlay from parent
+    wavesurfer.on('ready', () => {
+      track.removeChild(loadOverlay);
+    });
+
+    // create overlay that covers wavesurfer.js object within its waveContainer.
+    // point is to force user to initiate audio file on browser by
     // hitting play before they can drag/seek/timedate on wave ui.
     // first action on wavesurfer audio must be play().
-    // this avoids issue on mobile where timing goes out of sync if user drags/seeks
-    // prior to audio interaction. Mobile environment lock down what can
+    // this avoids issue on mobile issue where timing goes out of sync if user drags/seeks
+    // prior to audio interaction. Mobile environments lock down what can
     // happen on audio before first user interaction.
     // now interaction through ('click') and .play() is forced first.
     const initiateOverlay = document.createElement('div');
     initiateOverlay.classList.add('initiate-overlay');
 
-    // the initiation button in the overlay
-    const initiateText = document.createElement('button');
-    initiateText.classList.add('initiate-text');
-    initiateText.textContent = 'Click to Play';
-
     // append overlay elements to waveContaier
-    initiateOverlay.appendChild(initiateText);
     waveContainer.appendChild(initiateOverlay);
 
     // if overlay is clicked, initiate play() and remove overlay
@@ -111,7 +128,6 @@ const createPlayer = (
     // when paused, show the play img
     wavesurfer.on('pause', () => {
       playBtn.replaceChild(play, pause);
-      // wavesurfer.waveColor = 'blue';
     });
 
     // when playing, show, the pause img
@@ -146,7 +162,6 @@ const createPlayer = (
     // set initial current time to 00:00
     currentDisplay.textContent = '0:00';
     // whenever track time updates, update current time display
-
     wavesurfer.on('timeupdate', () => {
       currentDisplay.textContent = formatTime(wavesurfer.getCurrentTime());
       // console.log(wavesurfer.getCurrentTime());
@@ -167,27 +182,54 @@ const createPlayer = (
     // append timeDisplay to optionsDisplay
     optionsDisplay.appendChild(timeDisplay);
 
+    // *******************STYLE******************
+
     // js style for default that can be commented
     // DOM elements can be grabbed by assigned css selector
+    // track.style.position = 'relative';
+    // track.style.padding = '10px 10px 10px 10px';
+    // track.style.margin = '0 0 30px 0';
 
-    waveContainer.style.position = 'relative';
+    // waveContainer.style.position = 'relative';
 
-    initiateOverlay.style.position = 'absolute';
-    initiateOverlay.style.width = '100%';
-    initiateOverlay.style.height = '100%';
-    initiateOverlay.style.display = 'flex';
-    initiateOverlay.style.boxSizing = 'boder-box';
-    initiateOverlay.style.justifyContent = 'center';
-    initiateOverlay.style.alignItems = 'center';
-    initiateOverlay.style.zIndex = '2';
-    initiateOverlay.style.top = '0';
-    initiateOverlay.style.left = '0';
+    // initiateOverlay.style.position = 'absolute';
+    // initiateOverlay.style.width = '100%';
+    // initiateOverlay.style.height = '100%';
+    // initiateOverlay.style.display = 'flex';
+    // initiateOverlay.style.boxSizing = 'boder-box';
+    // initiateOverlay.style.justifyContent = 'center';
+    // initiateOverlay.style.alignItems = 'center';
+    // initiateOverlay.style.zIndex = '2';
+    // initiateOverlay.style.top = '0';
+
+    // loadOverlay.style.position = 'absolute';
+    // loadOverlay.style.width = '100%';
+    // loadOverlay.style.height = '100%';
+    // loadOverlay.style.display = 'flex';
+    // loadOverlay.style.justifyContent = 'center';
+    // loadOverlay.style.alignItems = 'center';
+    // loadOverlay.style.zIndex = '3';
+    // loadOverlay.style.top = '0';
+    // loadOverlay.style.left = '0';
+    // loadOverlay.style.backgroundColor = 'rgba(143, 143, 143, 0.233)';
+    // loadOverlay.style.borderRadius = '10px';
+
+    // loadBox.style.display = 'flex';
+    // loadBox.style.flexDirection = 'column';
+    // loadBox.style.fontFamily = 'Arial';
+    // loadBox.style.backgroundColor = 'white';
+    // loadBox.style.boxShadow = '0 0 10px 15px white';
+    // loadBox.style.width = '150px';
+    // loadBox.style.height = '45px';
+    // loadBox.style.borderRadius = '25px';
+    // loadBox.style.textAlign = 'center';
+    // loadBox.style.justifyContent = 'center';
 
     // trackTitle.style.fontSize = '20px';
+    // trackTitle.style.fontFamily = "Arial";
 
     // optionsDisplay.style.display = 'flex';
     // optionsDisplay.style.gap = '20px';
-    // optionsDisplay.style.margin = '0 0 40px 0';
     // optionsDisplay.style.alignItems = 'center';
 
     // playBtn.style.display = 'flex';
@@ -203,6 +245,7 @@ const createPlayer = (
 
     // timeDisplay.style.display = 'flex';
     // timeDisplay.style.gap = '5px';
+    // timeDisplay.style.fontFamily = 'Arial';
 
     // // playBtn can be grabbed by class and have ::hover applied for better results
     // playBtn.addEventListener('mouseenter', () => {
