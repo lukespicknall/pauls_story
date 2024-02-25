@@ -31,7 +31,7 @@ const createPlayer = (
     // div to hold the wavesurfer.js object and initiation overlays
     const waveContainer = document.createElement('div');
     waveContainer.id = `wave-container${[i]}`;
-    waveContainer.classList.add('wave-contaier');
+    waveContainer.classList.add('wave-container');
     track.appendChild(waveContainer);
 
     // append track to targetParent parameter
@@ -190,17 +190,15 @@ const createPlayer = (
     // track.style.padding = '10px 10px 10px 10px';
     // track.style.margin = '0 0 30px 0';
 
-    // waveContainer.style.position = 'relative';
+    // waveContainer.style.width = '100%';
 
     // initiateOverlay.style.position = 'absolute';
     // initiateOverlay.style.width = '100%';
     // initiateOverlay.style.height = '100%';
-    // initiateOverlay.style.display = 'flex';
     // initiateOverlay.style.boxSizing = 'boder-box';
-    // initiateOverlay.style.justifyContent = 'center';
-    // initiateOverlay.style.alignItems = 'center';
     // initiateOverlay.style.zIndex = '2';
     // initiateOverlay.style.top = '0';
+    // initiateOverlay.style.left = '0';
 
     // loadOverlay.style.position = 'absolute';
     // loadOverlay.style.width = '100%';
@@ -217,10 +215,11 @@ const createPlayer = (
     // loadBox.style.display = 'flex';
     // loadBox.style.flexDirection = 'column';
     // loadBox.style.fontFamily = 'Arial';
-    // loadBox.style.backgroundColor = 'white';
-    // loadBox.style.boxShadow = '0 0 10px 15px white';
-    // loadBox.style.width = '150px';
-    // loadBox.style.height = '45px';
+    // loadBox.style.color = 'white';
+    // loadBox.style.backgroundColor = 'rgb(102, 103, 155)';
+    // loadBox.style.boxShadow = '0 0 13px 16px rgb(102, 103, 155)';
+    // loadBox.style.width = '80px';
+    // loadBox.style.height = '26px';
     // loadBox.style.borderRadius = '25px';
     // loadBox.style.textAlign = 'center';
     // loadBox.style.justifyContent = 'center';
