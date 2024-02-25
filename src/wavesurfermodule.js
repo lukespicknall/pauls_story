@@ -191,6 +191,7 @@ const createPlayer = (
     // track.style.margin = '0 0 30px 0';
 
     // waveContainer.style.width = '100%';
+    // waveContainer.style.position = 'relative%';
 
     // initiateOverlay.style.position = 'absolute';
     // initiateOverlay.style.width = '100%';
@@ -217,9 +218,9 @@ const createPlayer = (
     // loadBox.style.fontFamily = 'Arial';
     // loadBox.style.color = 'white';
     // loadBox.style.backgroundColor = 'rgb(102, 103, 155)';
-    // loadBox.style.boxShadow = '0 0 13px 16px rgb(102, 103, 155)';
+    // loadBox.style.boxShadow = '0 0 11px 13px rgb(102, 103, 155)';
     // loadBox.style.width = '80px';
-    // loadBox.style.height = '26px';
+    // loadBox.style.height = '30px';
     // loadBox.style.borderRadius = '25px';
     // loadBox.style.textAlign = 'center';
     // loadBox.style.justifyContent = 'center';
