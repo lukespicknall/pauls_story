@@ -26,3 +26,5 @@ devices and browser users may not alter audio before first intiating it - so if
 a user tried to drag or seek on mobile prior to an initial play, the timing and
 ui on the wavesurfer player would break. With these overlays, there is no
 way to break the player prior to audio intiation.
+
+Demo - https://lukespicknall.github.io/pauls_story/
